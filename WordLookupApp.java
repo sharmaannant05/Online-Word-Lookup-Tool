@@ -33,7 +33,7 @@ public class WordLookupApp {
                 }
             } else {
                 System.out.println("Word not found. Did you mean:");
-                System.out.println(trie.getSuggestions(input));
+                System.out.println(trie.getSuggestionsWithEditDistance(input,5));
                 System.out.println("Enter your correction:");
                 String correctedWord = scanner.nextLine().trim();
 
