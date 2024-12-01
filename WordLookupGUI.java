@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.List;
 import java.util.Scanner;
 
 public class WordLookupGUI extends Application {
@@ -92,8 +93,12 @@ public class WordLookupGUI extends Application {
 
         suggestionsButton.setOnAction(event -> {
             String word = inputField.getText().trim().toLowerCase();
-            String suggestions = trie.getSuggestions(word);
-            resultArea.setText("Suggestions:\n" + suggestions);
+            List<String> suggestions = trie.getSuggestionsWithEditDistance(word, 5); // Top 5 suggestions
+            StringBuilder output = new StringBuilder("Did you mean:\n");
+            for (String suggestion : suggestions) {
+                output.append(suggestion).append("\n");
+            }
+            resultArea.setText(output.toString());
         });
 
         clearButton.setOnAction(event -> {
